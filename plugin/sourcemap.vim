@@ -1,3 +1,8 @@
+if exists('g:loaded_sourcemap')
+  finish
+endif
+let g:loaded_sourcemap = 1
+
 let s:save_cpo = &cpo
 set cpo&vim
 
@@ -7,6 +12,10 @@ set cpo&vim
 
 command! -nargs=* -complete=file SourceMapAddMap call sourcemap#add_map(<q-args>, 1)
 command! SourceMapSwitch call sourcemap#switch()
+command! SourceMapConvertQuickfixToOriginal call sourcemap#convert_quickfix_to_original(0)
+command! SourceMapConvertLocListToOriginal  call sourcemap#convert_quickfix_to_original(1)
+command! SourceMapAddOriginalToQuickfix call sourcemap#add_original_to_quickfix(0)
+command! SourceMapAddOriginalToLocList  call sourcemap#add_original_to_quickfix(1)
 
 
 let &cpo = s:save_cpo
